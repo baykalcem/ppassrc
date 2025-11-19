@@ -1,0 +1,9 @@
+./client.go
+./client_state.go
+./doc.go
+./errors.go
+./evaluation.go
+./oprf.go
+./server.go
+./utils.go
+./verifiable.go

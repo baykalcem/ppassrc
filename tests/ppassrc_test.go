@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"ppassrc/ppassrc"
 	"testing"
+	"time"
 )
 
 // 1. Unlinkability (sanity check on blinded requests)
@@ -65,6 +66,28 @@ func TestTCUF(t *testing.T) {
 		if ok {
 			t.Fatal("preminted token redeemed under fresh ctx* (violates targeted-context UF)")
 		}
+	}
+}
+
+func TestTimeWindowContextIsolation(t *testing.T) {
+	issuer, _ := ppassrc.NewIssuer()
+	client, _ := ppassrc.NewClient(issuer.VerificationKey())
+
+	window := 24 * time.Hour
+	monday := time.Date(2025, time.November, 17, 0, 0, 0, 0, time.UTC)
+	ctxMon := ppassrc.NewContextTimeWindow(monday, window)
+	ctxTue := ppassrc.NewContextTimeWindow(monday.Add(window), window)
+
+	b, aux, _ := client.Request(ctxMon)
+	ev, _ := issuer.Issue(b)
+	tok, _ := client.Finalize(ev, aux)
+
+	if ok, _ := issuer.Redeem(ctxTue, tok); ok {
+		t.Fatal("redemption should fail when context shifts to the next window")
+	}
+
+	if ok, _ := issuer.Redeem(ctxMon, tok); !ok {
+		t.Fatal("redemption failed with the original window context")
 	}
 }
 

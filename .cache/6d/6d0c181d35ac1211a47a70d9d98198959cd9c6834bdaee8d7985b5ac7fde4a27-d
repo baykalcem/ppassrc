@@ -1,0 +1,3 @@
+./bench_extended_test.go
+./benchmark_test.go
+./ppassrc_test.go

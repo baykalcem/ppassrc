@@ -1,0 +1,6 @@
+./curve.go
+./element.go
+./field.go
+./group.go
+./point.go
+./scalar.go
