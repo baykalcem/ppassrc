@@ -12,8 +12,6 @@ This implementation follows the algorithms in the paper as closely as possible a
 - Benchmarks  
 - A runnable end-to-end demo
 
----
-
 
 ###  Security Property Tests
 
