@@ -14,28 +14,8 @@ This implementation follows the algorithms in the paper as closely as possible a
 
 ---
 
-## 🚀 Features
 
-### ✔ Token Issuance (Blind VOPRF Evaluate)
-
-Implements the entire issuance procedure:
-- Compute `m = H(ctx || nonce)`
-- Blind the message
-- Server performs VOPRF Evaluate
-- Client unblinds and finalizes the token
-
-Matches Algorithms 1–3 in the paper.
-
-### ✔ Token Redemption
-
-Implements context-bound verification:
-- Recompute `m = H(ctx || nonce)`
-- Verify VOPRF output using issuer's public key
-- Enforce one-time use with a spent-list
-
-Matches Algorithm 4 in the paper.
-
-### ✔ Security Property Tests
+###  Security Property Tests
 
 Includes tests modeling the formal properties defined in the paper:
 - Unlinkability  
@@ -43,11 +23,11 @@ Includes tests modeling the formal properties defined in the paper:
 - Targeted-Context Unforgeability  
 - Robustness
 
-### ✔ Benchmarks
+###  Benchmarks
 
 Benchmarks issuance and redemption performance using Go's native testing framework.
 
-### ✔ Minimal and Reproducible
+###  Minimal and Reproducible
 
 Uses an actively maintained VOPRF implementation:
 ```go
@@ -58,7 +38,7 @@ which implements the standard **Ristretto255-SHA512** VOPRF ciphersuite from the
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 ppassrc/
@@ -78,7 +58,7 @@ ppassrc/
 
 ---
 
-## 🧪 Running Tests
+##  Running Tests
 
 ```bash
 go test ./...
@@ -86,21 +66,14 @@ go test ./...
 
 ---
 
-## 📈 Running Benchmarks
+##  Running Benchmarks
 
 ```bash
 go test -bench=. ./...
 ```
 
-Example benchmark (Apple M4):
-- Issuance: ~0.56 ms/op  
-- Redemption: ~0.04 ms/op
 
-These match expected performance for a Ristretto255-based VOPRF.
-
----
-
-## ▶️ Running the End-to-End Demo
+##  Running the End-to-End Demo
 
 ```bash
 go run main.go
@@ -116,7 +89,7 @@ This confirms correctness and one-time-use enforcement.
 
 ---
 
-## 🔒 Security Model
+##  Security Model
 
 PPass-RC inherits its security from the underlying VOPRF primitive:
 
@@ -129,7 +102,7 @@ The implementation directly mirrors the formal algorithms provided in the paper.
 
 ---
 
-## 📜 Reference
+##  Reference
 
 **Konrad Hanff, Anja Lehmann, and Cavit Özbay.**  
 *Security Analysis of Privately Verifiable Privacy Pass.*  
@@ -139,19 +112,11 @@ https://eprint.iacr.org/2025/1847
 
 ---
 
-## 🎓 About
 
-This repository was developed for a graduate-level cryptography project focused on modern Privacy-Pass–style anonymous credential systems.
-
-It aims to faithfully reproduce the protocol from the PPass-RC paper and provide clear, reproducible implementation and testing.
-
----
-
-## 📝 License
+##  License
 
 MIT License
 
-## 📧 Contact
 Cem Baykal: cbaykal@cs.unc.edu
 Jiangyuan Yuan: jyuan@cs.unc.edu
 
